@@ -27,7 +27,7 @@ export class TestService {
       take: query.pageSize,
       skip: (query.page - 1) * query.pageSize,
     });
-    // console.log(users);
+    console.log(users);
     return { code: 200, data: users, total };
   }
 }
