@@ -30,34 +30,21 @@ export class UsersController {
 
   @Get('list')
   findAll() {
-    messages: [
-      {
-        role: 'system',
-        content: '你好，我是一个智能AI，你可以向我问些问题。',
-      },
-      {
-        role: 'user',
-        content: '写一个50字的关于母亲的作文',
-      },
-    ],
-      temperature: 1.2,
-        max_tokens: 200,
-  })
-  // return this.usersService.findAll();
-}
+    // return this.usersService.findAll();
+  }
 
-@Get(':id')
-findOne(@Param('id') id: string) {
-  return this.usersService.findOne(+id);
-}
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.usersService.findOne(+id);
+  }
 
-@Patch(':id')
-update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-  return this.usersService.update(+id, updateUserDto);
-}
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(+id, updateUserDto);
+  }
 
-@Delete(':id')
-remove(@Param('id') id: string) {
-  return this.usersService.remove(+id);
-}
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.usersService.remove(+id);
+  }
 }
