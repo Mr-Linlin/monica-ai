@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { TestController } from './test/test.controller';
-import { TestModule } from './test/test.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
-    TestModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -18,8 +17,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       autoLoadEntities: true,
     }),
+    UsersModule,
+    ChatModule,
   ],
-  controllers: [AppController, TestController],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule { }
