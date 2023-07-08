@@ -1,12 +1,8 @@
 import { Controller, Post, Body, Sse } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
-
 interface MessageEvent {
   data: string | object;
-  id?: string;
-  type?: string;
-  retry?: number;
 }
 
 @Controller('chat')
