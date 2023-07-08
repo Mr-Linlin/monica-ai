@@ -1,24 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Sse,
-} from '@nestjs/common';
-import {
-  interval,
-  last,
-  map,
-  merge,
-  Observable,
-  Subject,
-  takeWhile,
-} from 'rxjs';
-import { ChatService } from './chat.service';
-import { CreateChatDto } from './dto/create-chat.dto';
-import { UpdateChatDto } from './dto/update-chat.dto';
+import { Controller, Post, Body, Sse } from '@nestjs/common';
+import { map, Observable } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 
 interface MessageEvent {
@@ -30,10 +11,7 @@ interface MessageEvent {
 
 @Controller('chat')
 export class ChatController {
-  constructor(
-    private readonly chatService: ChatService,
-    private httpService: HttpService,
-  ) { }
+  constructor(private httpService: HttpService) { }
 
   @Post('completion')
   @Sse('completion')
@@ -58,25 +36,5 @@ export class ChatController {
     });
 
     return chatStream$.pipe(map((data) => ({ data: { data } })));
-  }
-
-  @Get()
-  findAll() {
-    return this.chatService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.chatService.findOne(+id);
-  }
-
-  @Post(':id')
-  update(@Param('id') id: string, @Body() updateChatDto: UpdateChatDto) {
-    return this.chatService.update(+id, updateChatDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.chatService.remove(+id);
   }
 }
