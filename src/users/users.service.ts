@@ -64,8 +64,14 @@ export class UsersService {
     return { code: 200, data: users, total };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(phone: string) {
+    const existingUser = await this.usersRepository.findOne({
+      where: { phone },
+    });
+    if (existingUser) {
+      return existingUser;
+    }
+    return null;
   }
 
   async update(id: number, user: UpdateUserDto) {

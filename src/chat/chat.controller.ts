@@ -20,7 +20,6 @@ import { ChatService } from './chat.service';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { UpdateChatDto } from './dto/update-chat.dto';
 import { HttpService } from '@nestjs/axios';
-import { AxiosResponse } from 'axios';
 
 interface MessageEvent {
   data: string | object;
