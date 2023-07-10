@@ -1,6 +1,6 @@
 const productConfig = {
-  accessKeyId: 'LTAI5tGyvfLhjiRnVJv2vRpt',
-  accessKeySecret: 'wVOHnDXmJskCAxru5RR34l8nwABO62',
+  accessKeyId: 'LTAI5tGyvfLhjiv2vRpt',
+  accessKeySecret: 'wVOHnDXmJskCAxru5RRwABO62',
   endpoint: 'oss-cn-shenzhen.aliyuncs.com',
   bucket: 'lzt-cartoon',
   region: 'oss-cn-shenzhen',
