@@ -1,14 +1,14 @@
 const productConfig = {
-  accessKeyId: '',
-  accessKeySecret: '',
+  accessKeyId: 'LTAI5tS1iPWPJZsr2zZ3GUvR',
+  accessKeySecret: 'fG4RlzQVLbyyz5jPbFyNWarOZcduQq',
   endpoint: 'oss-cn-shenzhen.aliyuncs.com',
   bucket: 'lzt-cartoon',
   region: 'oss-cn-shenzhen',
 };
 
 const localConfig = {
-  accessKeyId: '',
-  accessKeySecret: '',
+  accessKeyId: 'LTAI5tS1iPWPJZsr2zZ3GUvR',
+  accessKeySecret: 'fG4RlzQVLbyyz5jPbFyNWarOZcduQq',
   endpoint: 'oss-cn-shenzhen.aliyuncs.com',
   bucket: 'lzt-cartoon',
   region: 'oss-cn-shenzhen',
