@@ -3,6 +3,8 @@ import {
   Post,
   UseInterceptors,
   UploadedFile,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import multer = require('multer');
@@ -15,6 +17,7 @@ export class CommonController {
   constructor(private readonly commonService: CommonService) { }
 
   @Post('upload')
+  @HttpCode(HttpStatus.OK)
   @UseInterceptors(
     FileInterceptor('file', {
       storage: multer.diskStorage({

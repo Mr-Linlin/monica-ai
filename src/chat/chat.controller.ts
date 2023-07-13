@@ -1,6 +1,7 @@
-import { Controller, Post, Body, Sse } from '@nestjs/common';
+import { Controller, Post, Body, Sse, Headers } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
+import { CHAT_URL } from '../config/config';
 interface MessageEvent {
   data: string | object;
 }
@@ -12,8 +13,7 @@ export class ChatController {
   @Post('completion')
   @Sse('completion')
   async completion(@Body() obj: any): Promise<Observable<MessageEvent>> {
-    const url = 'https://ejcvirv.belikehub.com:30003/v3/getChatStream';
-    const response = this.httpService.post(url, obj, {
+    const response = this.httpService.post(CHAT_URL, obj, {
       responseType: 'stream', // 设置响应类型为流
       headers: {
         'Content-Type': 'application/json',
