@@ -26,6 +26,15 @@ export class User {
   @Column({ default: '' })
   avatar: string;
 
+  @Column({ default: 0, comment: '0:普通会员,1:黄金会员,2:白金会员' })
+  level: number;
+
+  @Column({ default: '普通会员' })
+  level_name: string;
+
+  @Column({ default: 10 })
+  buy_chat_times: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

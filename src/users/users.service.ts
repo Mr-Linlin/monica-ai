@@ -73,6 +73,39 @@ export class UsersService {
     }
     return null;
   }
+  /**
+   *
+   * @param id 用户id
+   * @return '返回用户剩余提问次数'
+   */
+  async getCount(id: number) {
+    const res = await this.usersRepository.findOne({
+      where: { id },
+    });
+    if (res) {
+      return res.buy_chat_times;
+    }
+    return 0;
+  }
+  /**
+   *
+   * @param id 用户id
+   * @return 减去用户提问次数
+   */
+  async increaseBuyChatTimes(id: number) {
+    const user = await this.usersRepository.findOne({
+      where: { id },
+    });
+    if (user) {
+      if (user.buy_chat_times > 0) {
+        user.buy_chat_times -= 1;
+      }
+      await this.usersRepository.save(user);
+      return { code: 200, message: '操作成功' };
+    } else {
+      return { code: 400, message: '操作失败，用户不存在' };
+    }
+  }
 
   async update(id: number, user: UpdateUserDto) {
     const existingUser = await this.usersRepository.findOne({
