@@ -83,7 +83,7 @@ export class UsersService {
       where: { id },
     });
     if (res) {
-      return res.buy_chat_times;
+      return res;
     }
     return 0;
   }
@@ -97,8 +97,8 @@ export class UsersService {
       where: { id },
     });
     if (user) {
-      if (user.buy_chat_times > 0) {
-        user.buy_chat_times -= 1;
+      if (user.chat_times < user.buy_chat_times) {
+        user.chat_times += 1;
       }
       await this.usersRepository.save(user);
       return { code: 200, message: '操作成功' };

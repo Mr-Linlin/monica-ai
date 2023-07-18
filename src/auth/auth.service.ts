@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
@@ -17,8 +17,9 @@ export class AuthService {
    */
   async signIn(phone: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(phone);
+
     if (!user || user.password !== pass) {
-      throw new UnauthorizedException();
+      return { code: 201, message: '手机号或密码不正确' };
     }
     const { password, ...obj } = user;
     const payload = { password, phone, id: obj.id };
@@ -29,6 +30,7 @@ export class AuthService {
         code: 200,
         access_token,
         user: obj,
+        message: '登录成功',
       };
     }
   }

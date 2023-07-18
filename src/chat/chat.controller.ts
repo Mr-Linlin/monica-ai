@@ -29,8 +29,8 @@ export class ChatController {
     const { id } = await this.jwtService.verifyAsync(token, {
       secret: jwtConstants.secret,
     });
-    const chatTime = await this.chatService.getBuyChatTimes(id);
-    if (chatTime > 0) {
+    const user = await this.chatService.getBuyChatTimes(id);
+    if (user && user.chat_times < user.buy_chat_times) {
       const response = this.httpService.post(CHAT_URL, obj, {
         responseType: 'stream', // 设置响应类型为流
         headers: {

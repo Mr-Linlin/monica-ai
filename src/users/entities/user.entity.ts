@@ -35,6 +35,9 @@ export class User {
   @Column({ default: 10 })
   buy_chat_times: number;
 
+  @Column({ default: 0 })
+  chat_times: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
