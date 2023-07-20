@@ -1,15 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Headers } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
+import { jwtConstants } from 'src/auth/constants';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    private jwtService: JwtService,
   ) { }
   /**
    *
@@ -106,7 +109,34 @@ export class UsersService {
       return { code: 400, message: '操作失败，用户不存在' };
     }
   }
-
+  /**
+   *
+   * @param _id 用户id
+   * @returns 返回用户信息
+   */
+  async getDetail(_id: number) {
+    console.log(_id);
+    const user = await this.usersRepository.findOne({
+      where: { id: _id },
+    });
+    if (user) {
+      const { password, ...obj } = user;
+      console.log(password);
+      return { code: 200, user: obj, message: 'success' };
+    }
+    return { code: 201, message: 'error' };
+  }
+  async extractToken(authorization: string) {
+    const token = this.extractTokenFromHeader(authorization);
+    const { id } = await this.jwtService.verifyAsync(token, {
+      secret: jwtConstants.secret,
+    });
+    return id;
+  }
+  extractTokenFromHeader(authorization: any): string {
+    const [type, token] = authorization?.split(' ') ?? [];
+    return type === 'Bearer' ? token : '';
+  }
   async update(id: number, user: UpdateUserDto) {
     const existingUser = await this.usersRepository.findOne({
       where: [{ username: user.username }, { phone: user.phone }],

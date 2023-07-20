@@ -16,4 +16,8 @@ export class ChatService {
   async increaseBuyChatTimes(id: number) {
     return this.userService.increaseBuyChatTimes(id);
   }
+  extractTokenFromHeader(authorization: any): string {
+    const [type, token] = authorization?.split(' ') ?? [];
+    return type === 'Bearer' ? token : '';
+  }
 }
