@@ -31,6 +31,11 @@ export class ChatController {
     });
     const user = await this.chatService.getBuyChatTimes(id);
     if (user && user.chat_times < user.buy_chat_times) {
+      if (obj.messages.length > 0) {
+        obj.messages.forEach((item: any) => {
+          delete item.time;
+        });
+      }
       const response = this.httpService.post(CHAT_URL, obj, {
         responseType: 'stream', // 设置响应类型为流
         headers: {
