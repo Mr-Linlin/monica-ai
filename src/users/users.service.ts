@@ -31,6 +31,7 @@ export class UsersService {
     if (existingUser) {
       return { code: 201, message: '用户名或手机号已存在' };
     }
+    user.buy_chat_times = 10;
     const result = await this.usersRepository.save(user);
     if (result) {
       return { code: 200, message: '注册成功' };
@@ -115,13 +116,13 @@ export class UsersService {
    * @returns 返回用户信息
    */
   async getDetail(_id: number) {
-    console.log(_id);
+    // console.log(_id);
     const user = await this.usersRepository.findOne({
       where: { id: _id },
     });
     if (user) {
       const { password, ...obj } = user;
-      console.log(password);
+      // console.log(password);
       return { code: 200, user: obj, message: 'success' };
     }
     return { code: 201, message: 'error' };
