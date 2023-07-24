@@ -1,10 +1,23 @@
-import { Controller, Post, Body, Sse, Headers } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Sse,
+  Headers,
+  HttpCode,
+  HttpStatus,
+  Get,
+  Query,
+} from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { CHAT_URL } from '../config/config';
 import { JwtService } from '@nestjs/jwt';
 import { ChatService } from './chat.service';
 import { jwtConstants } from '../auth/constants';
+import { CreateCategoryDto } from './dto/create-category.dto';
+import { CreatePromptDto } from './dto/create-prompt.dto';
+import { CommonService } from '../common/common.service';
 
 interface MessageEvent {
   data: string | object;
@@ -16,6 +29,7 @@ export class ChatController {
     private httpService: HttpService,
     private jwtService: JwtService,
     private chatService: ChatService,
+    private commonService: CommonService,
   ) { }
 
   @Post('completion')
@@ -25,7 +39,9 @@ export class ChatController {
     @Headers() hearder: any,
   ): Promise<Observable<MessageEvent> | string> {
     // 验证会员等级和回答次数
-    const token = this.extractTokenFromHeader(hearder.authorization);
+    const token = this.chatService.extractTokenFromHeader(
+      hearder.authorization,
+    );
     const { id } = await this.jwtService.verifyAsync(token, {
       secret: jwtConstants.secret,
     });
@@ -61,8 +77,24 @@ export class ChatController {
     });
     return res.pipe(map((data) => ({ data: { data } })));
   }
-  extractTokenFromHeader(authorization: any): string {
-    const [type, token] = authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : '';
+  @HttpCode(HttpStatus.OK)
+  @Post('prompt/category/add')
+  categoryAdd(@Body() createUserDto: CreateCategoryDto) {
+    return this.chatService.categoryAdd(createUserDto);
+  }
+  @Get('prompt/category/list')
+  @HttpCode(HttpStatus.OK)
+  async findCategotyAll(@Query() query: any) {
+    return this.commonService.findModelAll('categoryRepository', query);
+  }
+  @HttpCode(HttpStatus.OK)
+  @Post('prompt/add')
+  promptAdd(@Body() prompt: CreatePromptDto) {
+    return this.chatService.promptAdd(prompt);
+  }
+  @Get('prompt/list')
+  @HttpCode(HttpStatus.OK)
+  async findPromptAll(@Query() query: any) {
+    return this.commonService.findModelAll('promptRepository', query);
   }
 }

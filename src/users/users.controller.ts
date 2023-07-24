@@ -7,6 +7,7 @@ import {
   Res,
   Get,
   HttpCode,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -30,5 +31,10 @@ export class UsersController {
   async getDetail(@Headers() hearder: any) {
     const id = await this.usersService.extractToken(hearder.authorization);
     return this.usersService.getDetail(id);
+  }
+  @Get('/list')
+  @HttpCode(HttpStatus.OK)
+  async getUserList(@Query() query: any) {
+    return this.usersService.findAll(query);
   }
 }

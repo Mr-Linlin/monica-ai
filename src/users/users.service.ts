@@ -60,12 +60,27 @@ export class UsersService {
       return { code: 201, message: '手机号或密码不正确' };
     }
   }
+  /**
+   *
+   * @param query
+   * @returns 获取用户列表
+   */
   async findAll(query: any) {
-    const [users, total] = await this.usersRepository.findAndCount({
-      take: query.pageSize,
-      skip: (query.page - 1) * query.pageSize,
+    const propsToCheck = ['pageSize', 'page'];
+    const hasAllProps = propsToCheck.every((prop) => {
+      return query.hasOwnProperty(prop);
     });
-    return { code: 200, data: users, total };
+    if (!hasAllProps) {
+      return { code: 201, message: '请检查参数是否正确' };
+    }
+    const { pageSize, page, ...obj } = query;
+
+    const data = await this.usersRepository.find({
+      take: pageSize,
+      skip: (page - 1) * pageSize,
+      where: obj,
+    });
+    return { code: 200, data, total: data.length };
   }
 
   async findOne(phone: string) {
