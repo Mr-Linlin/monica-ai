@@ -79,8 +79,16 @@ export class ChatController {
   }
   @HttpCode(HttpStatus.OK)
   @Post('prompt/category/add')
-  categoryAdd(@Body() createUserDto: CreateCategoryDto) {
-    return this.chatService.categoryAdd(createUserDto);
+  categoryAdd(
+    @Body() createUserDto: CreateCategoryDto,
+    @Headers() hearder: any,
+  ) {
+    return this.chatService.categoryAdd(createUserDto, hearder.authorization);
+  }
+  @HttpCode(HttpStatus.OK)
+  @Post('prompt/category/del')
+  categoryDel(@Body() query: CreateCategoryDto) {
+    return this.commonService.modelDel('categoryRepository', query.id);
   }
   @Get('prompt/category/list')
   @HttpCode(HttpStatus.OK)
@@ -89,8 +97,13 @@ export class ChatController {
   }
   @HttpCode(HttpStatus.OK)
   @Post('prompt/add')
-  promptAdd(@Body() prompt: CreatePromptDto) {
-    return this.chatService.promptAdd(prompt);
+  promptAdd(@Body() prompt: CreatePromptDto, @Headers() hearder: any) {
+    return this.chatService.promptAdd(prompt, hearder.authorization);
+  }
+  @HttpCode(HttpStatus.OK)
+  @Post('prompt/del')
+  promptDel(@Body() query: CreatePromptDto) {
+    return this.commonService.modelDel('promptRepository', query.id);
   }
   @Get('prompt/list')
   @HttpCode(HttpStatus.OK)

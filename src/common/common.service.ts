@@ -46,6 +46,21 @@ export class CommonService {
     const random = Math.floor(Math.random() * 90000 + 10000).toString();
     return `${year}${month}${day}${hour}${minute}${second}${random}`;
   }
+  async modelDel(apiName: string, id: number) {
+    let res: any = [];
+    switch (apiName) {
+      case 'categoryRepository':
+        res = await this.categoryRepository.delete(id);
+        break;
+      case 'promptRepository':
+        res = await this.promptRepository.delete(id);
+        break;
+    }
+    if (res.affected === 0) {
+      return { code: 201, messag: '用户不存在!' };
+    }
+    return { code: 200, message: '删除成功' };
+  }
   /**
    *
    * @param apiName 查询表名

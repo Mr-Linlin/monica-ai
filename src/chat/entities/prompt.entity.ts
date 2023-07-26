@@ -7,6 +7,8 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Category } from './category.entity';
+import { User } from 'src/users/entities/user.entity';
+
 @Entity()
 export class Prompt {
   @PrimaryGeneratedColumn()
@@ -14,6 +16,15 @@ export class Prompt {
 
   @ManyToOne(() => Category)
   category: Category;
+
+  @Column({ comment: '分类id', default: null })
+  categoryId: number | string;
+
+  @ManyToOne(() => User)
+  user: User;
+
+  @Column({ comment: '用户id' })
+  userId: number | string;
 
   @Column({ comment: '提示词名称' })
   name: string;

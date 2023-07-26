@@ -33,7 +33,9 @@ export class ChatService {
    * @param category  创建分类的 DTO
    * @returns 返回新创建的分类实体
    */
-  async categoryAdd(category: CreateCategoryDto) {
+  async categoryAdd(category: CreateCategoryDto, authorization: string) {
+    const userId = await this.userService.extractToken(authorization);
+    category.userId = userId;
     const res = await this.categoryRepository.findOne({
       where: [{ name: category.name }],
     });
@@ -48,7 +50,9 @@ export class ChatService {
    * @param prompt  创建分类的 DTO
    * @returns 返回新创建的分类实体
    */
-  async promptAdd(prompt: CreatePromptDto) {
+  async promptAdd(prompt: CreatePromptDto, authorization: string) {
+    const userId = await this.userService.extractToken(authorization);
+    prompt.userId = userId;
     const res = await this.promptRepository.findOne({
       where: [{ name: prompt.name }],
     });

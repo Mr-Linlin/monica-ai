@@ -4,12 +4,20 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
-
+import { Category } from 'src/chat/entities/category.entity';
+import { Prompt } from 'src/chat/entities/prompt.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @OneToMany(() => Category, (prompt) => prompt.user)
+  prompt: Category[];
+
+  @OneToMany(() => Prompt, (prompt) => prompt.user)
+  Prompt: Prompt[];
 
   @Column()
   username: string;
