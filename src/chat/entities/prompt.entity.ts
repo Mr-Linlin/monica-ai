@@ -29,7 +29,7 @@ export class Prompt {
   @Column({ comment: '提示词名称' })
   name: string;
 
-  @Column({ default: '', comment: '使用方括号[ ]来指定用户输入' })
+  @Column({ comment: '使用方括号[ ]来指定用户输入', type: 'text' })
   content: string;
 
   @Column({ default: '', comment: 'Prompt回复文本' })
