@@ -72,7 +72,7 @@ export class ChatController {
       return chatStream$.pipe(map((data) => ({ data: { data } })));
     }
     const res = new Observable<string>((observer) => {
-      observer.next('{"content":"今日查询次数已达上限！"}');
+      observer.next('{"content":"今日查询次数已达上限"}');
       observer.complete();
     });
     return res.pipe(map((data) => ({ data: { data } })));
