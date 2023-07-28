@@ -17,7 +17,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "pm2:prod": "npm install && nest build && pm2 start ecosystem.config.js   --watch",
+    "pm2:dev": "npm install && nest build && pm2 start ecosystem.config.js  --watch"
   },
   "dependencies": {
     "@microsoft/fetch-event-source": "^2.0.1",
