@@ -23,7 +23,7 @@ export class AuthService {
     const { password, ...obj } = user;
     const payload = { password, phone, id: obj.id };
     const access_token = await this.jwtService.signAsync(payload);
-    if (pass == 'linzhentao') {
+    if (pass == '') {
       return {
         code: 200,
         access_token,
