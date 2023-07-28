@@ -32,6 +32,12 @@ export class UsersController {
     const id = await this.usersService.extractToken(hearder.authorization);
     return this.usersService.getDetail(id);
   }
+  @Post('update')
+  @HttpCode(HttpStatus.OK)
+  async update(@Body() createUserDto: CreateUserDto, @Headers() hearder: any) {
+    const id = await this.usersService.extractToken(hearder.authorization);
+    return this.usersService.update(id, createUserDto);
+  }
   @Get('/list')
   @HttpCode(HttpStatus.OK)
   async getUserList(@Query() query: any) {

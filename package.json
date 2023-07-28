@@ -29,6 +29,7 @@
     "@nestjs/jwt": "^10.1.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/serve-static": "^4.0.0",
     "@nestjs/typeorm": "^10.0.0",
     "@types/ali-oss": "^6.16.8",
     "ali-oss": "^6.17.1",

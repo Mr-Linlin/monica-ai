@@ -155,13 +155,13 @@ export class UsersService {
   }
   async update(id: number, user: UpdateUserDto) {
     const existingUser = await this.usersRepository.findOne({
-      where: [{ username: user.username }, { phone: user.phone }],
+      where: [{ id }],
     });
-
-    if (existingUser && existingUser.id !== id) {
-      return { code: 400, message: '用户名或手机号已存在' };
+    if (!existingUser) {
+      return { code: 201, message: '用户不存在' };
     }
     const result: any = await this.usersRepository.update(id, user);
+    console.log(id, user, existingUser);
 
     if (result.affected > 0) {
       return { code: 200, message: '更新成功' };
