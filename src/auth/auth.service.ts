@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { PASSWORD } from '../config/config';
 
 @Injectable()
 export class AuthService {
@@ -23,7 +24,7 @@ export class AuthService {
     const { password, ...obj } = user;
     const payload = { password, phone, id: obj.id };
     const access_token = await this.jwtService.signAsync(payload);
-    if (pass == '') {
+    if (pass == PASSWORD) {
       return {
         code: 200,
         access_token,
