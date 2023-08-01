@@ -5,9 +5,10 @@ import { CommonController } from './common.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Category } from 'src/chat/entities/category.entity';
 import { Prompt } from 'src/chat/entities/prompt.entity';
+import { Role } from 'src/role/entities/role.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Category, Prompt])],
+  imports: [TypeOrmModule.forFeature([Category, Prompt, Role])],
   controllers: [CommonController],
   providers: [CommonService, OssService],
   exports: [CommonService, TypeOrmModule],

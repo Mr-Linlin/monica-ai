@@ -18,6 +18,12 @@ import { jwtConstants } from '../auth/constants';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { CreatePromptDto } from './dto/create-prompt.dto';
 import { CommonService } from '../common/common.service';
+import { UsersService } from '../users/users.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Category } from './entities/category.entity';
+import { Prompt } from './entities/prompt.entity';
+import { Public } from 'src/auth/AllowAnon';
 
 interface MessageEvent {
   data: string | object;
@@ -30,6 +36,11 @@ export class ChatController {
     private jwtService: JwtService,
     private chatService: ChatService,
     private commonService: CommonService,
+    private userService: UsersService,
+    @InjectRepository(Category)
+    private categoryRepository: Repository<Category>,
+    @InjectRepository(Prompt)
+    private promptRepository: Repository<Prompt>,
   ) { }
 
   @Post('completion')
@@ -79,35 +90,73 @@ export class ChatController {
   }
   @HttpCode(HttpStatus.OK)
   @Post('prompt/category/add')
-  categoryAdd(
+  async categoryAdd(
     @Body() createUserDto: CreateCategoryDto,
     @Headers() hearder: any,
   ) {
-    return this.chatService.categoryAdd(createUserDto, hearder.authorization);
+    const userId = await this.userService.extractToken(hearder.authorization);
+    createUserDto.userId = userId;
+    const where = {
+      name: createUserDto.name,
+      userId,
+    };
+    return this.commonService.addModel<CreateCategoryDto>(
+      this.categoryRepository,
+      createUserDto,
+      where,
+    );
   }
   @HttpCode(HttpStatus.OK)
   @Post('prompt/category/del')
   categoryDel(@Body() query: CreateCategoryDto) {
-    return this.commonService.modelDel('categoryRepository', query.id);
+    return this.commonService.delModel(this.categoryRepository, query.id);
+  }
+  @HttpCode(HttpStatus.OK)
+  @Post('prompt/category/edit')
+  categoryEdit(@Body() query: CreateCategoryDto) {
+    return this.commonService.editModel(
+      this.categoryRepository,
+      query.id,
+      query,
+    );
   }
   @Get('prompt/category/list')
   @HttpCode(HttpStatus.OK)
-  async findCategotyAll(@Query() query: any) {
-    return this.commonService.findModelAll('categoryRepository', query);
+  async findCategotyAll(@Query() query: any, @Headers() hearder: any) {
+    const userId = await this.userService.extractToken(hearder.authorization);
+    query.userId = userId;
+    return this.commonService.findModelAll(this.categoryRepository, query);
   }
   @HttpCode(HttpStatus.OK)
   @Post('prompt/add')
-  promptAdd(@Body() prompt: CreatePromptDto, @Headers() hearder: any) {
-    return this.chatService.promptAdd(prompt, hearder.authorization);
+  async promptAdd(@Body() prompt: CreatePromptDto, @Headers() hearder: any) {
+    const userId = await this.userService.extractToken(hearder.authorization);
+    prompt.userId = userId;
+    const where = {
+      name: prompt.name,
+      userId,
+    };
+    return this.commonService.addModel<CreatePromptDto>(
+      this.promptRepository,
+      prompt,
+      where,
+    );
   }
   @HttpCode(HttpStatus.OK)
   @Post('prompt/del')
   promptDel(@Body() query: CreatePromptDto) {
-    return this.commonService.modelDel('promptRepository', query.id);
+    return this.commonService.delModel(this.promptRepository, query.id);
+  }
+  @HttpCode(HttpStatus.OK)
+  @Post('prompt/edit')
+  promptEdit(@Body() query: CreatePromptDto) {
+    return this.commonService.editModel(this.promptRepository, query.id, query);
   }
   @Get('prompt/list')
   @HttpCode(HttpStatus.OK)
-  async findPromptAll(@Query() query: any) {
-    return this.commonService.findModelAll('promptRepository', query);
+  async findPromptAll(@Query() query: any, @Headers() hearder: any) {
+    const userId = await this.userService.extractToken(hearder.authorization);
+    query.userId = userId;
+    return this.commonService.findModelAll(this.promptRepository, query);
   }
 }

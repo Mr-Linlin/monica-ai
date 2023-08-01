@@ -74,13 +74,23 @@ export class UsersService {
       return { code: 201, message: '请检查参数是否正确' };
     }
     const { pageSize, page, ...obj } = query;
+    const [[], total] = await this.usersRepository.findAndCount({
+      take: pageSize,
+      skip: (page - 1) * pageSize,
+    });
 
     const data = await this.usersRepository.find({
       take: pageSize,
       skip: (page - 1) * pageSize,
       where: obj,
     });
-    return { code: 200, data, total: data.length };
+    const res = data.map((item) => {
+      const { password, ...row } = item;
+      return {
+        ...row,
+      };
+    });
+    return { code: 200, data: res, total: total };
   }
 
   async findOne(phone: string) {

@@ -37,7 +37,7 @@ export class ChatService {
     const userId = await this.userService.extractToken(authorization);
     category.userId = userId;
     const res = await this.categoryRepository.findOne({
-      where: [{ name: category.name }],
+      where: [{ name: category.name, userId }],
     });
     if (res) {
       return { code: 201, message: '分类已存在' };
@@ -54,7 +54,7 @@ export class ChatService {
     const userId = await this.userService.extractToken(authorization);
     prompt.userId = userId;
     const res = await this.promptRepository.findOne({
-      where: [{ name: prompt.name }],
+      where: [{ name: prompt.name, userId }],
     });
     if (res) {
       return { code: 201, message: 'prompt已存在' };

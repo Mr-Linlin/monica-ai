@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { ChatModule } from './chat/chat.module';
 import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -12,9 +13,9 @@ import { CommonModule } from './common/common.module';
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'root',
+      username: 'fiana-ai',
       password: 'root',
-      database: 'fiana_ai',
+      database: 'fiana-ai',
       entities: [],
       synchronize: true,
       autoLoadEntities: true,
@@ -23,6 +24,7 @@ import { CommonModule } from './common/common.module';
     ChatModule,
     AuthModule,
     CommonModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [],

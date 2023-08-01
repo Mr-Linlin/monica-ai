@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  ManyToOne,
 } from 'typeorm';
 import { Category } from 'src/chat/entities/category.entity';
 import { Prompt } from 'src/chat/entities/prompt.entity';
+import { Role } from 'src/role/entities/role.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -18,6 +20,9 @@ export class User {
 
   @OneToMany(() => Prompt, (prompt) => prompt.user)
   Prompt: Prompt[];
+
+  @ManyToOne(() => Role)
+  role: Role;
 
   @Column()
   username: string;
