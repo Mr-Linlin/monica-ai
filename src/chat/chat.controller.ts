@@ -23,7 +23,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
 import { Prompt } from './entities/prompt.entity';
-import { Public } from 'src/auth/AllowAnon';
 
 interface MessageEvent {
   data: string | object;

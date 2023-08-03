@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { OssService } from './oss.service';
 import path = require('path');
-import { query } from 'express';
 
 @Injectable()
 export class CommonService {
