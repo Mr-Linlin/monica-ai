@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
 import { RoleModule } from './role/role.module';
 import { TicketModule } from './ticket/ticket.module';
+import { CollectModule } from './collect/collect.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { TicketModule } from './ticket/ticket.module';
     CommonModule,
     RoleModule,
     TicketModule,
+    CollectModule,
   ],
   controllers: [AppController],
   providers: [],

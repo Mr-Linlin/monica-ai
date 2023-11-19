@@ -33,7 +33,7 @@
     "@nestjs/typeorm": "^10.0.0",
     "@types/ali-oss": "^6.16.8",
     "ali-oss": "^6.17.1",
-    "axios": "^1.4.0",
+    "axios": "^1.5.1",
     "install": "^0.13.0",
     "mysql2": "^3.4.2",
     "reflect-metadata": "^0.1.13",

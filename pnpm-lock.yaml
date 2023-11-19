@@ -22,7 +22,6 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.0.0
   '@typescript-eslint/parser': ^5.0.0
   ali-oss: ^6.17.1
-  axios: ^1.4.0
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
@@ -43,7 +42,7 @@ specifiers:
 
 dependencies:
   '@microsoft/fetch-event-source': registry.npmmirror.com/@microsoft/fetch-event-source/2.0.1
-  '@nestjs/axios': registry.npmmirror.com/@nestjs/axios/3.0.0_y3mopmz7s76tazlkc5n7jhhnyq
+  '@nestjs/axios': registry.npmmirror.com/@nestjs/axios/3.0.0_7u4l2qzmnego2xuu7pwg7mz5xy
   '@nestjs/common': registry.npmmirror.com/@nestjs/common/9.4.3_atc7tu2sld2m3nk4hmwkqn6qde
   '@nestjs/core': registry.npmmirror.com/@nestjs/core/9.4.3_c4fgdp752ib7dsgrlnt7fswfce
   '@nestjs/jwt': registry.npmmirror.com/@nestjs/jwt/10.1.0_@nestjs+common@9.4.3
@@ -53,7 +52,6 @@ dependencies:
   '@nestjs/typeorm': registry.npmmirror.com/@nestjs/typeorm/10.0.0_nktyjm3hkn2boz7s6l2p266t2u
   '@types/ali-oss': registry.npmmirror.com/@types/ali-oss/6.16.8
   ali-oss: registry.npmmirror.com/ali-oss/6.17.1
-  axios: registry.npmmirror.com/axios/1.4.0
   install: registry.npmmirror.com/install/0.13.0
   mysql2: registry.npmmirror.com/mysql2/3.4.2
   reflect-metadata: registry.npmmirror.com/reflect-metadata/0.1.13
@@ -1052,7 +1050,7 @@ packages:
     version: 2.0.1
     dev: false
 
-  registry.npmmirror.com/@nestjs/axios/3.0.0_y3mopmz7s76tazlkc5n7jhhnyq:
+  registry.npmmirror.com/@nestjs/axios/3.0.0_7u4l2qzmnego2xuu7pwg7mz5xy:
     resolution: {integrity: sha512-ULdH03jDWkS5dy9X69XbUVbhC+0pVnrRcj7bIK/ytTZ76w7CgvTZDJqsIyisg3kNOiljRW/4NIjSf3j6YGvl+g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/axios/-/axios-3.0.0.tgz}
     id: registry.npmmirror.com/@nestjs/axios/3.0.0
     name: '@nestjs/axios'
@@ -1064,7 +1062,6 @@ packages:
       rxjs: ^6.0.0 || ^7.0.0
     dependencies:
       '@nestjs/common': registry.npmmirror.com/@nestjs/common/9.4.3_atc7tu2sld2m3nk4hmwkqn6qde
-      axios: registry.npmmirror.com/axios/1.4.0
       reflect-metadata: registry.npmmirror.com/reflect-metadata/0.1.13
       rxjs: registry.npmmirror.com/rxjs/7.8.1
     dev: false
@@ -2265,18 +2262,7 @@ packages:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/asynckit/-/asynckit-0.4.0.tgz}
     name: asynckit
     version: 0.4.0
-
-  registry.npmmirror.com/axios/1.4.0:
-    resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/axios/-/axios-1.4.0.tgz}
-    name: axios
-    version: 1.4.0
-    dependencies:
-      follow-redirects: registry.npmmirror.com/follow-redirects/1.15.2
-      form-data: registry.npmmirror.com/form-data/4.0.0
-      proxy-from-env: registry.npmmirror.com/proxy-from-env/1.1.0
-    transitivePeerDependencies:
-      - debug
-    dev: false
+    dev: true
 
   registry.npmmirror.com/babel-jest/29.5.0_@babel+core@7.22.5:
     resolution: {integrity: sha512-mA4eCDh5mSo2EcA9xQjVTpmbbNk32Zb3Q3QFQsNhaK56Q+yoXowzFodLux30HRgyOho5rsQ6B0P9QpMkvvnJ0Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/babel-jest/-/babel-jest-29.5.0.tgz}
@@ -2769,6 +2755,7 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       delayed-stream: registry.npmmirror.com/delayed-stream/1.0.0
+    dev: true
 
   registry.npmmirror.com/commander/2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/commander/-/commander-2.20.3.tgz}
@@ -3001,6 +2988,7 @@ packages:
     name: delayed-stream
     version: 1.0.0
     engines: {node: '>=0.4.0'}
+    dev: true
 
   registry.npmmirror.com/denque/2.1.0:
     resolution: {integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/denque/-/denque-2.1.0.tgz}
@@ -3638,18 +3626,6 @@ packages:
     version: 3.2.7
     dev: true
 
-  registry.npmmirror.com/follow-redirects/1.15.2:
-    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/follow-redirects/-/follow-redirects-1.15.2.tgz}
-    name: follow-redirects
-    version: 1.15.2
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dev: false
-
   registry.npmmirror.com/fork-ts-checker-webpack-plugin/8.0.0_hybrf64lftnf5l2xwgg7goi2iu:
     resolution: {integrity: sha512-mX3qW3idpueT2klaQXBzrIM/pHw+T0B/V9KHEvNrqijTq9NFnMZU6oreVxDYcf33P8a5cW+67PjodNHthGnNVg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-8.0.0.tgz}
     id: registry.npmmirror.com/fork-ts-checker-webpack-plugin/8.0.0
@@ -3685,6 +3661,7 @@ packages:
       asynckit: registry.npmmirror.com/asynckit/0.4.0
       combined-stream: registry.npmmirror.com/combined-stream/1.0.8
       mime-types: registry.npmmirror.com/mime-types/2.1.35
+    dev: true
 
   registry.npmmirror.com/formidable/2.1.2:
     resolution: {integrity: sha512-CM3GuJ57US06mlpQ47YcunuUZ9jpm8Vx+P2CGt2j7HpgkKZO/DJYQ0Bobim8G6PFQmK5lOqOOdUXboU+h73A4g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/formidable/-/formidable-2.1.2.tgz}
